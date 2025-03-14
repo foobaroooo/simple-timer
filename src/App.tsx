@@ -4,21 +4,19 @@ import TimeCounter from './components/TimeCounter'
 import Button from './components/Button'
 
 function App() {
-  const [isRunning, setIsRunning] = useState(false)
-  const [isReset, setIsReset] = useState(false)
+
+  const [action, setAction] = useState('reset');
 
   const handleTimerStop = () => {
-    setIsRunning(false)
+    setAction('stop');
   }
 
   const handleTimerStart = () => {
-    setIsRunning(true)
-    setIsReset(false)
+    setAction('start');
   }
   
   const handleTimerReset = () => {
-    setIsReset(true)
-    setIsRunning(false)
+    setAction('reset');
   }
   
   return (
@@ -26,7 +24,7 @@ function App() {
       <h1>Simple Timer</h1>
       <div className="timer">
         <div className="timer-display">
-          <TimeCounter isRunning={isRunning} isReset={isReset} />
+          <TimeCounter action={action} />
         </div>
         <div className="timer-controls">
           <Button onClick={handleTimerStart}>Start</Button>

@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 
-interface TimeCounterProps {
-    isRunning: boolean,
-    isReset: boolean
-}
-
-export default function TimeCounter({ isRunning, isReset }: TimeCounterProps) {
+export default function TimeCounter({action}: {action: string}) {
     const [timeLeft, setTimeLeft] = useState(300);
+    const [isRunning, setIsRunning] = useState(false)
+    const [isReset, setIsReset] = useState(false)
+
+    useEffect(() => {
+        if (action === 'start') {
+            setIsRunning(true);
+            setIsReset(false);
+        } else if (action === 'stop') {
+            setIsRunning(false);
+        } else if (action === 'reset') {
+            setIsReset(true);
+            setIsRunning(false);
+        }
+    }, [action]);
     
     useEffect(() => {
         if (isReset) {
